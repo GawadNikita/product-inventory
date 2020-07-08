@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-lg-8 col-md-8">
+    <h3 class="section-title">All Products</h3>
+    <mat-table [dataSource]="products" class="mat-elevation-z8">
+      <ng-container matColumnDef="company_name">
+        <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="product_name">
+        <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.product_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cost">
+        <mat-header-cell *matHeaderCellDef>Cost </mat-header-cell>
+        <mat-cell *matCellDef="let element"> &#8377; {{element.cost |number :'1.1-1'}} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnNames;"></mat-row>
+    </mat-table>
+  </div>
+  <div class="col-lg-4 col-md-4">
+    <h3 class="section-title">Add new product</h3>
+    <div class="form-description">Fill up the form given below to add new product</div>
+    <form [formGroup]="formNewProduct" (ngSubmit)="addNewProduct()">
+      <mat-form-field class="example-full-width">
+        <mat-select formControlName="company_name" [(ngModel)]="selectedCompany" required>
+          <mat-option></mat-option>
+          <mat-option [value]="option.company_name" *ngFor="let option of companies">{{ option.company_name }}</mat-option>
+        </mat-select>
+        <mat-error  *ngIf="productFormValidated.company_name.errors">
+          <div *ngIf="productFormValidated.company_name.errors.required">*Mandatory</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Product name</mat-label>
+        <input matInput formControlName="product_name" required>
+        <mat-error  *ngIf="productFormValidated.product_name.errors">
+          <div *ngIf="productFormValidated.product_name.errors.required">*Mandatory</div>
+        </mat-error>
+      </mat-form-field>
+      
+    
+      <mat-form-field class="example-full-width">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="cost" required>
+        <mat-error  *ngIf="productFormValidated.cost.errors">
+          <div *ngIf="productFormValidated.cost.errors.required">*Mandatory</div>
+          <div *ngIf="productFormValidated.cost.errors.pattern">Please enter a valid number</div>
+        </mat-error>
+      </mat-form-field>
+      <div class="mt-3">
+        <button type="submit" mat-raised-button color="primary">Add New Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

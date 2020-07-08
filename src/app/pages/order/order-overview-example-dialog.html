@@ -1,0 +1,12 @@
+<div class="invoice-wrapper"  #orderData>
+  <h3 class="section-title text-center">Invoice</h3>
+  <div class="row mb-5">
+    <div class="col-lg-12"><strong class="form-description">Order No.:</strong> {{data.order_id}}</div>
+    <div class="col-lg-12"><strong class="form-description">Company Name:</strong> {{data.company_name}}</div>
+    <div class="col-lg-12"><strong class="form-description">Product Name:</strong> {{data.product_name}}</div>
+    <div class="col-lg-12"><strong class="form-description">Cost:</strong> Rs. {{data.cost}}</div>
+    <div class="col-lg-12"><strong class="form-description">Qty.:</strong> {{data.quantity}}</div>
+    <div class="col-lg-12"><strong class="form-description">Total:</strong> Rs. {{(data.cost * data.quantity)}}</div>
+  </div>
+</div>
+<input type="button" value="Download PDF" class="btn btn-success" (click)="savePDF()">  

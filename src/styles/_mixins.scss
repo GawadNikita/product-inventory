@@ -1,0 +1,4 @@
+@import './var';
+@mixin setFontCSW($color, $size, $weight){
+  color: $color; font-size: $size; font-weight: $weight;
+}

@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-lg-7 col-md-7">
+    <h3 class="section-title">All Companies</h3>
+    <mat-table [dataSource]="companies" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.company_name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="gstin">
+        <mat-header-cell *matHeaderCellDef> GST No. </mat-header-cell>
+        <mat-cell class="text-uppercase" *matCellDef="let element"> {{element.gstin}} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnNames;"></mat-row>
+    </mat-table>
+  </div>
+  <div class="col-lg-5 col-md-5">
+    <h3 class="section-title">Add new company</h3>
+    <div class="form-description">Fill up the form given below to add new company</div>
+    <form [formGroup]="formNewCompany" (ngSubmit)="addNewCompany()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Company name</mat-label>
+        <input matInput formControlName="company_name" required>
+        <mat-error  *ngIf="companyFormValidated.company_name.errors">
+          <div *ngIf="companyFormValidated.company_name.errors.required">*Mandatory</div>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>GST No.</mat-label>
+        <input matInput formControlName="gstin" required>
+        <mat-error  *ngIf="companyFormValidated.gstin.errors">
+          <div *ngIf="companyFormValidated.gstin.errors.required">*Mandatory</div>
+          <div *ngIf="companyFormValidated.gstin.errors.pattern">Please enter a valid GST number</div>
+        </mat-error>
+      </mat-form-field>
+      <div class="mt-3">
+        <button type="submit" mat-raised-button color="primary">Add New Company</button>
+      </div>
+    </form>
+  </div>
+</div>
